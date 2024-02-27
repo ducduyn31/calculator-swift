@@ -13,6 +13,7 @@ enum CalculatorError: Error, CustomStringConvertible {
     case invalidOperator(suggestedFix: String? = nil)
     case invalidNumber(suggestedFix: String? = nil)
     case invalidExpression(suggestedFix: String? = nil)
+    case divideByZero(suggestedFix: String? = nil)
     
     var description: String {
         switch self {
@@ -24,6 +25,8 @@ enum CalculatorError: Error, CustomStringConvertible {
             return "Invalid number. \(suggestedFix ?? "")"
         case .invalidExpression(let suggestedFix):
             return "Invalid expression. \(suggestedFix ?? "")"
+        case .divideByZero(let suggestedFix):
+            return "Divide by zero. \(suggestedFix ?? "")"
         }
     }
 }

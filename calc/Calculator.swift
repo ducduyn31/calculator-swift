@@ -35,11 +35,17 @@ class Calculator {
                 case "x":
                     valueStack.append(valueStack.removeLast() * nextValue.toInt())
                 case "/":
+                    guard nextValue.toInt() != 0 else {
+                        throw CalculatorError.divideByZero(suggestedFix: "Please provide a non-zero value at \(sliceQuerySample(args, at: i)))")
+                    }
                     valueStack.append(valueStack.removeLast() / nextValue.toInt())
                 case "%":
+                    guard nextValue.toInt() != 0 else {
+                        throw CalculatorError.divideByZero(suggestedFix: "Please provide a non-zero value at \(sliceQuerySample(args, at: i)))")
+                    }
                     valueStack.append(valueStack.removeLast() % nextValue.toInt())
                 default:
-                    throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator. Eg: +, -, x, /")
+                    throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator at \(sliceQuerySample(args, at: i)))")
                 }
             } else {
                 throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator. Eg: +, -, x, /")

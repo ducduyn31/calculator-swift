@@ -11,12 +11,13 @@ import Foundation
 class Calculator {
     
     func calculate(_ args: [String]) throws -> String {
+        // Check if the input is empty or the first value should be a number
         guard args.count > 0  || args[0].isNumber() else {
             throw CalculatorError.invalidExpression(suggestedFix: "Please provide a valid expression. Eg: 1 + 1")
         }
         
         
-        var valueStack = [args[0].toInt()]
+        var valueStack: [Int] = [args[0].toInt()]
         
         for i in stride(from: 1, to: args.count, by: 2) {
             let operatorSymbol = args[i]
@@ -27,25 +28,10 @@ class Calculator {
             }
             
             if operatorSymbol.isOperator() {
-                switch operatorSymbol {
-                case "+":
-                    valueStack.append(nextValue.toInt())
-                case "-":
-                    valueStack.append(-nextValue.toInt())
-                case "x":
-                    valueStack.append(valueStack.removeLast() * nextValue.toInt())
-                case "/":
-                    guard nextValue.toInt() != 0 else {
-                        throw CalculatorError.divideByZero(suggestedFix: "Please provide a non-zero value at \(sliceQuerySample(args, at: i)))")
-                    }
-                    valueStack.append(valueStack.removeLast() / nextValue.toInt())
-                case "%":
-                    guard nextValue.toInt() != 0 else {
-                        throw CalculatorError.divideByZero(suggestedFix: "Please provide a non-zero value at \(sliceQuerySample(args, at: i)))")
-                    }
-                    valueStack.append(valueStack.removeLast() % nextValue.toInt())
-                default:
-                    throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator at \(sliceQuerySample(args, at: i)))")
+                if let operation = availableOperations.first(where: { $0.operatorSymbol == operatorSymbol }) {
+                    try operation.handle(&valueStack, nextValue.toInt())
+                } else {
+                    throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator. Eg: +, -, x, /")
                 }
             } else {
                 throw CalculatorError.invalidOperator(suggestedFix: "Please provide a valid operator. Eg: +, -, x, /")

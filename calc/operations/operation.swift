@@ -10,26 +10,38 @@ import Foundation
 
 struct BinaryOperation {
     let operatorSymbol: String
-    let handle: (_ context: inout [Int], _ next: Int) throws -> Void
+    let apply: (_ context: OperationContext, _ next: Int, _ index: Int) throws -> Void
 }
 
-let availableOperations : [BinaryOperation] = [
-    BinaryOperation(operatorSymbol: "+", handle: { context, next in
+let SupportedOperations : [String:BinaryOperation] = [
+    "+": BinaryOperation(operatorSymbol: "+", apply: { context, next, index in
         context.append(next)
     }),
-    BinaryOperation(operatorSymbol: "-", handle: { context, next in
+    "-": BinaryOperation(operatorSymbol: "-", apply: { context, next, index in
         context.append(-next)
     }),
-    BinaryOperation(operatorSymbol: "x", handle: { context, next in
+    "x": BinaryOperation(operatorSymbol: "x", apply: { context, next, index in
         context.append(context.removeLast() * next)
     }),
-    BinaryOperation(operatorSymbol: "/", handle: { context, next in
+    "/": BinaryOperation(operatorSymbol: "/", apply: { context, next, index in
         guard next != 0 else {
-            throw CalculatorError.divideByZero(suggestedFix: "Please provide a valid expression. Eg: 1 + 1")
+            throw context.buildContextfulError(errorType: .divideByZero, at: index)
         }
         context.append(context.removeLast() / next)
     }),
-    BinaryOperation(operatorSymbol: "%", handle: { context, next in
+    "%": BinaryOperation(operatorSymbol: "%", apply: { context, next, index in
+        guard next != 0 else {
+            throw context.buildContextfulError(errorType: .divideByZero, at: index)
+        }
         context.append(context.removeLast() % next)
     })
 ]
+
+extension Dictionary where Key == String, Value == BinaryOperation {
+    func matchOperator(_ operatorSymbol: String) throws -> BinaryOperation {
+        guard let operation = self[operatorSymbol] else {
+            throw ErrorWithMessage(message: "The only supported operators are +, -, x, /, %.")
+        }
+        return operation
+    }
+}

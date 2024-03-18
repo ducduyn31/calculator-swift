@@ -11,9 +11,10 @@
 		054418F12055EEE9008C821B /* calc in Resources */ = {isa = PBXBuildFile; fileRef = 054418EA2055EED5008C821B /* calc */; };
 		054418F62055EFEB008C821B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054418F52055EFEB008C821B /* main.swift */; };
 		05C4D95F1E76182500AB9F52 /* CalcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C4D95E1E76182500AB9F52 /* CalcTest.swift */; };
+		167DC02F2BA7297900CDDB9C /* context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167DC02E2BA7297900CDDB9C /* context.swift */; };
 		16B692362B7F9AC600E5EED2 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B692352B7F9AC600E5EED2 /* CalculatorError.swift */; };
 		16B6923C2B85BEC900E5EED2 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6923B2B85BEC900E5EED2 /* StringUtils.swift */; };
-		16B6923E2B85C15000E5EED2 /* DoubleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6923D2B85C15000E5EED2 /* DoubleUtils.swift */; };
+		16B6923E2B85C15000E5EED2 /* NumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6923D2B85C15000E5EED2 /* NumberUtils.swift */; };
 		16D318E22B8DBB3D00BE36DC /* operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D318E12B8DBB3D00BE36DC /* operation.swift */; };
 		3CF665BF24335A1500EC9CF2 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF665BE24335A1500EC9CF2 /* Calculator.swift */; };
 /* End PBXBuildFile section */
@@ -48,9 +49,10 @@
 		05C4D95E1E76182500AB9F52 /* CalcTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcTest.swift; sourceTree = "<group>"; };
 		05C4D9601E76182500AB9F52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05F9F69E1E9DEDD500694D73 /* CalcTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CalcTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		167DC02E2BA7297900CDDB9C /* context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = context.swift; sourceTree = "<group>"; };
 		16B692352B7F9AC600E5EED2 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		16B6923B2B85BEC900E5EED2 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
-		16B6923D2B85C15000E5EED2 /* DoubleUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleUtils.swift; sourceTree = "<group>"; };
+		16B6923D2B85C15000E5EED2 /* NumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtils.swift; sourceTree = "<group>"; };
 		16D318E12B8DBB3D00BE36DC /* operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = operation.swift; sourceTree = "<group>"; };
 		3CF665BE24335A1500EC9CF2 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +129,7 @@
 			children = (
 				16B692352B7F9AC600E5EED2 /* CalculatorError.swift */,
 				16B6923B2B85BEC900E5EED2 /* StringUtils.swift */,
-				16B6923D2B85C15000E5EED2 /* DoubleUtils.swift */,
+				16B6923D2B85C15000E5EED2 /* NumberUtils.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				16D318E12B8DBB3D00BE36DC /* operation.swift */,
+				167DC02E2BA7297900CDDB9C /* context.swift */,
 			);
 			path = operations;
 			sourceTree = "<group>";
@@ -186,7 +189,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = UTS;
 				TargetAttributes = {
 					054418E92055EED5008C821B = {
@@ -238,8 +241,9 @@
 			files = (
 				16B6923C2B85BEC900E5EED2 /* StringUtils.swift in Sources */,
 				16B692362B7F9AC600E5EED2 /* CalculatorError.swift in Sources */,
+				167DC02F2BA7297900CDDB9C /* context.swift in Sources */,
 				054418F62055EFEB008C821B /* main.swift in Sources */,
-				16B6923E2B85C15000E5EED2 /* DoubleUtils.swift in Sources */,
+				16B6923E2B85C15000E5EED2 /* NumberUtils.swift in Sources */,
 				3CF665BF24335A1500EC9CF2 /* Calculator.swift in Sources */,
 				16D318E22B8DBB3D00BE36DC /* operation.swift in Sources */,
 			);
@@ -369,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -423,7 +427,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;

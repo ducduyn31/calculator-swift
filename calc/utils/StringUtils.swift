@@ -8,6 +8,10 @@
 
 import Foundation
 
+func isColorSupported() -> Bool {
+    return ProcessInfo.processInfo.environment["TERM"] != nil
+}
+
 
 extension String {
     func isNumber() -> Bool {
@@ -15,10 +19,24 @@ extension String {
     }
     
     func isOperator() -> Bool {
-        return ["+", "-", "x", "/", "%"].contains(self)
+        return SupportedOperations.keys.contains(self)
     }
     
     func toInt() -> Int {
         return Int(self)!
     }
+    
+    func withColor(_ color: StringColors) -> String {
+        if isColorSupported() {
+            return color.rawValue + self + StringColors.reset.rawValue
+        }
+        return self
+    }
+}
+
+enum StringColors: String {
+    case error = "\u{001B}[0;31m"
+    case success = "\u{001B}[0;32m"
+    case warning = "\u{001B}[0;33m"
+    case reset = "\u{001B}[0;0m"
 }

@@ -13,3 +13,9 @@ extension Double {
         return floor(self) == self
     }
 }
+
+extension Int {
+    func isOdd() -> Bool {
+        return self % 2 != 0
+    }
+}

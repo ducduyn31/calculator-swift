@@ -56,6 +56,7 @@ struct ErrorWithMessage: Error, CustomStringConvertible {
 
 extension OperationContext {
     
+    // Giving the context of where the error is, we can provide a more detailed error message
     fileprivate func sliceQuerySample(at: Int, takeOperator: Bool) throws -> (String, String, String) {
         guard at >= 0 && at < self.count else {
             throw ErrorWithMessage(message: "Please provide a valid expression. Eg: 1 + 1")
@@ -84,6 +85,7 @@ extension OperationContext {
         return (before.joined(separator: " "), target, after.joined(separator: " "))
     }
     
+    // Adding color and context to the error message
     fileprivate func buildErrorMessage(errorType: CalculatorError, at: Int) -> String {
         
         let (before, error, after) = try! sliceQuerySample(at: at, takeOperator: errorType == .invalidOperator)

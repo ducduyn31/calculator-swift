@@ -8,7 +8,9 @@
 
 import Foundation
 
-
+/// The context of the operation, storing the current values and the query arguments
+///
+/// This can be thought of as a stack of pairs of operator and number, with the first element being a number
 class OperationContext {
     
     private var valueStack: [Int]
@@ -29,6 +31,7 @@ class OperationContext {
         self.queryArgs = queryArgs
     }
     
+    // Initialize with the first number in the query arguments
     convenience init(queryArgs: [String]) {
         // First argument should always be a number
         self.init(initialValues: queryArgs.count > 0 ? [queryArgs[0].toInt()] : [], queryArgs: queryArgs)
